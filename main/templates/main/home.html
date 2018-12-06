@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
+    <div class="container">
+        {% for user in users %}
+            <div class="flash">{{ user }}</div>
+        {% endfor %}
+    </div>
     <div class="form-row">
         <div class="col-12">
             <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg">
