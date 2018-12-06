@@ -10,27 +10,14 @@ class DatabaseMongo:
         self.client = pymongo.MongoClient()
         self.db = self.client[db_name]
 
-    def get_collection(self, collection_name):
-        """Return a collection from database
-
-        Keyword arguments:
-        filters -- a dict like so : { key1 : value1, key2 : value2, ..., keyN : valueN }
-        """
-        return self.make_query(collection_name)
-
-    def make_query(self, collection_name, filters=None):
-        """Allows to perform a query on the database
-
-        Keyword arguments:
-        filters -- a dict like so : { key1 : value1, key2 : value2, ..., keyN : valueN }
-        """
-        return self.db[collection_name].find(filters) if filters else self.db[collection_name].find()
-
 
 class TripadvisorMongoDB(DatabaseMongo):
 
     def __init__(self, *args, **kwargs):
         super().__init__(db_name='tripadvisor', *args, **kwargs)
+
+    def lazy_load(self, collection_name, filters=None, begin_at=0, loaded=10):
+            return list(self.db[collection_name].find(filters, {'_id': False}).skip(begin_at).limit(loaded))
 
 # Attractions and Attraction_Review
 

@@ -1,0 +1,12 @@
+:root{
+    --clear-blue: #37e9e6;
+    --clear-green: #37e98d;
+}
+
+.bg-clear-blue{
+    background-color: var(--clear-blue);
+}
+
+.bg-clear-green{
+    background-color: var(--clear-green);
+}

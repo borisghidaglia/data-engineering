@@ -3,6 +3,7 @@
     <head>
         {% block head %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Not Tripadvisor{% endblock %}</title>
@@ -11,11 +12,16 @@
     <body>
         <header>
         {% block header %}
-            <h1 class="display-1 py-5 text-center bg-light">Home Page</h1>
+            <div class="bg-secondary">
+                <div class="container">
+                    <h1 class="display-3 pt-4 pb-5 mb-0 text-center text-light">{% block main_h1%}Not Tripadvisor{% endblock %}</h1>
+                </div>
+            </div>
         {% endblock %}
         </header>
         {% block content %}
         {% endblock %}
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     </body>
 </html>

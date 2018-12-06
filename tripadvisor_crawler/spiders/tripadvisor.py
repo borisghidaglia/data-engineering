@@ -111,7 +111,6 @@ class TripadvisorReviewSpider(Spider):
             )
 
 
-
 class TripadvisorUserSpider(Spider):
     name = 'tripadvisor_user'
     allowed_domains = ['tripadvisor.fr']
