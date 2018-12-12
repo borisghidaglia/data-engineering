@@ -1,8 +1,20 @@
+/*  Variables */
 :root{
     --clear-blue: #37e9e6;
+    --google-blue: #1967d2;
     --clear-green: #37e98d;
 }
 
+/* Reset */
+a:hover{
+    text-decoration: none;
+}
+
+a:focus{
+    outline: none;
+}
+
+/* Backgrounds */
 .bg-clear-blue{
     background-color: var(--clear-blue);
 }

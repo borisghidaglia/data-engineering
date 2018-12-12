@@ -7,6 +7,7 @@ from os.path import abspath
 from tripadvisor_crawler.utils import TripadvisorMongoDB
 db = TripadvisorMongoDB()
 
+# Main routes
 @app.route('/')
 def home():
     reviews = db.lazy_load('tripadvisor_review')
@@ -20,6 +21,16 @@ def home():
         col_3=col_3
     )
 
+@app.route('/search')
+def search():
+
+    return render_template(
+        'main/search.html',
+    )
+
+
+
+# API routes
 @app.route('/api/fetch-raw-reviews/<begin_at>')
 def fetch_raw_reviews(begin_at=0):
     reviews = db.lazy_load('tripadvisor_review', begin_at=int(begin_at))

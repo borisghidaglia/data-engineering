@@ -1,3 +1,4 @@
+// # Homepage
 function fetchReviews() {
 
     let beginAt = document.querySelectorAll('.card').length + 1
@@ -43,11 +44,35 @@ function insertReview(review) {
         colHeights[i] = 1/eltsHeight
     }
 
-    console.log(colHeights);
     let idMax = indexOfMax(colHeights)
     cardColumns[idMax].append(card)
 }
 
+// # Form
+// ## Main
+// class ElasticsearchForm {
+//     constructor() {
+//         // Main form
+//         this.state = null
+//     }
+//
+//
+// }
+function manageFormChoice(sender) {
+    console.log(sender);
+}
+
+
+function fetchResults(sender) {
+    console.log(sender);
+}
+
+function updateValue(fieldName) {
+    let span = document.getElementById(fieldName)
+    span.innerText = span.parentNode.nextElementSibling.value
+}
+
+// # Utils
 function indexOfMax(arr) {
     if (arr.length === 0) {
         return -1;

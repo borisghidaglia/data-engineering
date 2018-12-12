@@ -1,18 +1,15 @@
 {% extends "base.html" %}
+
+{% block sub_header_title %}What do you want to try ?{% endblock %}
+
+{% block sub_header_subtitle %}
+<div class="row d-flex justify-content-center align-items-center  py-3">
+    <a href="{{ url_for('search') }}"><button type="button" class="btn bg-clear-blue text-dark mx-3 mb-3">Search through the data !</button></a>
+    <button type="button" class="btn bg-clear-green text-dark mx-3 mb-3">Generate Graphs</button>
+</div>
+{% endblock %}
+
 {% block content %}
-    <div class="bg-light py-3">
-        <div class="container">
-            <div class="row">
-                <div class="container-fluid">
-                    <h2 class="font-weight-light text-center py-3">What do you want to try ?</h2>
-                    <div class="row d-flex justify-content-center align-items-center  py-3">
-                      <button type="button" class="btn bg-clear-blue mx-3 mb-3">Search Through Reviews</button>
-                      <button type="button" class="btn bg-clear-green mx-3 mb-3">Search Through Users</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="py-5">
         <div class="container">
             <h2 class="font-weight-light text-center py-3">There is just some raw data here, but scroll down to enjoy the lazy loading 😉</h2>
@@ -39,7 +36,7 @@
                 {% for review in col_2 %}
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="card-title">{{ review.title }}</h5>
+                            <h5 class="card-title" style="color:var(--bg-clear-blue)">{{ review.title }}</h5>
                             <p class="card-text">{{ review.content }}</p>
                         </div>
                         <ul class="list-group list-group-flush">
@@ -54,7 +51,7 @@
                 {% for review in col_3 %}
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="card-title">{{ review.title }}</h5>
+                            <h5 class="card-title" style="color:var(--bg-clear-blue)">{{ review.title }}</h5>
                             <p class="card-text">{{ review.content }}</p>
                         </div>
                         <ul class="list-group list-group-flush">

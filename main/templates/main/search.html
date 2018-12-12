@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block sub_header_title %}Welcome on this Elasticsearch powered page ! 🚀{% endblock %}
+{% block content %}
+<div class="container">
+    <form class="py-5" action="javascript:;" onsubmit="fetchResults(this)" method="post">
+        <div class="form-group">
+
+            <!-- Main form -->
+            <label class="h4 mb-3">What do you want to browse ?</label>
+            <div class="form-group mb-5">
+                <div class="form-group custom-control custom-radio">
+                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" oninput="manageFormChoice(this)">
+                    <label class="custom-control-label" for="customRadio1">Reviews</label>
+                </div>
+                <div class="form-group custom-control custom-radio">
+                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" oninput="manageFormChoice(this)">
+                    <label class="custom-control-label" for="customRadio2">Users</label>
+                </div>
+            </div>
+            <!-- End Main Form -->
+
+            <!-- User form -->
+            <div id=user-form>
+                <label class="h5 mb-3">Ok, you want to find users ? Fill this form to custom your search !</label>
+                <div class="form-group mb-3">
+                    <div class="form-group custom-control custom-radio" style="padding-left:0">
+                        <label for="customRange1">Username</label>
+                        <input type="text" class="form-control" placeholder="City">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="form-group custom-control custom-radio" style="padding-left:0">
+                        <label for="customRange1">Number of contributions <span class="h6" id="nb-contrib"></span></label>
+                        <input type="range" class="custom-range" id="customRange1" min="0" max="100" oninput="updateValue('nb-contrib')">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="form-group custom-control custom-radio" style="padding-left:0">
+                        <label for="customRange1">Number of cities visited <span class="h6" id="nb-cities"></span></label>
+                        <input type="range" class="custom-range" id="customRange1" min="0" max="100" oninput="updateValue('nb-cities')">
+                    </div>
+                </div>
+            </div>
+            <!-- End User Form -->
+
+            <!-- Review form -->
+            <div id=review-form>
+                <label class="h5 mb-3">Ok, you want to find reviews ? Fill this form to custom your search !</label>
+                <div class="form-group mb-3">
+                    <div class="form-group custom-control custom-radio" style="padding-left:0">
+                        <label for="customRange1">Title</label>
+                        <input type="text" class="form-control" placeholder="Le meilleur plat de ma vie ">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="form-group custom-control custom-radio" style="padding-left:0">
+                        <label for="customRange1">Content</label>
+                        <input type="text" class="form-control" placeholder="Magnifique endroit !">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="form-group custom-control custom-radio" style="padding-left:0">
+                        <label for="customRange1">Posted by</label>
+                        <input type="text" class="form-control" placeholder="Jean">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="form-group custom-control custom-radio" style="padding-left:0">
+                        <label for="customRange1">Attraction</label>
+                        <input type="text" class="form-control" placeholder="Tour Eiffel">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="form-group custom-control custom-radio" style="padding-left:0">
+                        <label for="customRange1">Grade <span class="h6" id="grade"></span></label>
+                        <input type="range" class="custom-range" id="customRange1" min="0" max="50" step="5" oninput="updateValue('grade')">
+                    </div>
+                </div>
+            </div>
+            <!-- End Review Form -->
+
+            <button type="submit" class="btn bg-clear-green">Search</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
