@@ -35,7 +35,7 @@ class TripadvisorAttractionReviewSpider(Spider):
 
     def __init__(self, category=None, *args, **kwargs):
             super().__init__(*args, **kwargs)
-            self.attractions = TripadvisorMongoDB().get_collection('tripadvisor_attraction')
+            self.attractions = TripadvisorMongoDB().db["tripadvisor_attraction"].find()
 
     def start_requests(self):
         """ For each attraction in database, start crawling the attraction_review indexed by their
@@ -70,7 +70,7 @@ class TripadvisorReviewSpider(Spider):
 
     def __init__(self, category=None, *args, **kwargs):
             super().__init__(*args, **kwargs)
-            self.users = TripadvisorMongoDB().get_collection('tripadvisor_user')
+            self.users = TripadvisorMongoDB().db["tripadvisor_user"].find()
 
     def start_requests(self):
         for user in self.users:
@@ -117,7 +117,7 @@ class TripadvisorUserSpider(Spider):
 
     def __init__(self, category=None, *args, **kwargs):
             super().__init__(*args, **kwargs)
-            self.attraction_reviews = TripadvisorMongoDB().get_collection('tripadvisor_attraction_review')
+            self.attraction_reviews = TripadvisorMongoDB().db["tripadvisor_attraction_review"].find()
 
     def start_requests(self):
         for attraction_review in self.attraction_reviews:
