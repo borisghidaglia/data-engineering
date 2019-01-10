@@ -6,7 +6,7 @@
         <div class="form-row">
             <div class="col-md-5">
                 <label class="h5 mb-3">What are you looking for ?</label>
-                <input type="text" class="form-control" placeholder="Super visite !">
+                <input id="search-input" type="text" class="form-control" placeholder="Super visite !">
             </div>
         </div>
     </form>
@@ -16,4 +16,9 @@
         {% endfor %}
     </div>
 </div>
+{% endblock %}
+
+{% block script %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 {% endblock %}

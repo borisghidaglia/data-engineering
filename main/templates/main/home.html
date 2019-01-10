@@ -64,8 +64,13 @@
             </div>
         </div>
         <div class="btn-group d-flex justify-content-center py-5" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-dark" onclick="fetchReviews();" nbClick="0">Load More</button>
+            <button id="load-more" type="button" class="btn btn-dark" nbClick="0">Load More</button>
         </div>
     </div>
 
+{% endblock %}
+
+{% block script %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/card-columns.js') }}"></script>
 {% endblock %}
