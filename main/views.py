@@ -39,3 +39,21 @@ def search():
 def fetch_raw_reviews(begin_at=0):
     reviews = db_mongo.lazy_load('tripadvisor_review', begin_at=int(begin_at))
     return jsonify(reviews)
+
+@app.route('/api/all-reviews')
+def get_all_reviews():
+    all_reviews = db_mongo.db['tripadvisor_review'].find(None,{'_id':False})
+    return jsonify(list(all_reviews))
+
+
+@app.route('/api/grades')
+def get_grades():
+    grades = db_mongo.db['tripadvisor_review'].find(None, {'grade': True, '_id':False})
+    grade_list = [grade_dict['grade'] for grade_dict in grades]
+
+    return jsonify(grade_list)
+    # return jsonify(dict(grades))
+
+@app.route('/grade-hist')
+def grade_hist():
+    return render_template('plotting.html')
