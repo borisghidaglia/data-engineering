@@ -5,8 +5,8 @@
 </div>
 {% endblock content %}
 
-{% block js %}
+{% block script %}
     {{ super() }}
         <script src="{{ url_for('static', filename='js/plotly-latest.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/plotting.js') }}"></script>
-{% endblock js %}
+{% endblock script %}
