@@ -25,4 +25,11 @@ class ElasticsearchDB():
             yield obj
 
     def test(self):
-        return self.client.search(index="tripadvisor_user", body={"query": {"match_all": {}}})
+        query = {
+            "query": {
+               "regexp": { "username": ".*fran.*"} 
+            }
+        }
+        res = self.client.search(index="tripadvisor_user", body=query)
+        print(res)
+        return res
