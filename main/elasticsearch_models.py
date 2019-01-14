@@ -24,12 +24,12 @@ class ElasticsearchDB():
             }
             yield obj
 
-    def test(self):
+    def autocomplete_username(self, query):
         query = {
+            "size" : 50,
             "query": {
-               "regexp": { "username": ".*fran.*"} 
+               "regexp": { "username": ".*" + query + ".*"}
             }
         }
         res = self.client.search(index="tripadvisor_user", body=query)
-        print(res)
         return res

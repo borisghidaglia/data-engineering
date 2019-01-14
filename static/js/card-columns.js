@@ -13,7 +13,7 @@ class CardColumnsReviews {
     fetchReviews() {
         let beginAt = document.querySelectorAll('.card').length + 1
 
-        fetch(window.location + 'api/fetch-raw-reviews/'+beginAt)
+        fetch("http://" + window.location.host + '/api/fetch-raw-reviews/'+beginAt)
         .then(function(response) {
             return response.json()
         }.bind(this))
@@ -22,6 +22,7 @@ class CardColumnsReviews {
                 this.insertReview(reviews[i])
             }
         }.bind(this));
+
     }
 
     insertReview(review) {

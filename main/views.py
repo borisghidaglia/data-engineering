@@ -26,7 +26,7 @@ def home():
 
 @app.route('/search')
 def search():
-    data = db_elastic.test()
+    data = db_elastic.autocomplete_username(query="")
     return render_template(
         'main/search.html',
         data = data
@@ -39,3 +39,8 @@ def search():
 def fetch_raw_reviews(begin_at=0):
     reviews = db_mongo.lazy_load('tripadvisor_review', begin_at=int(begin_at))
     return jsonify(reviews)
+
+@app.route('/api/fetch-users-autocomplete/<query>')
+def fetch_user_autocomplete(query):
+    data = db_elastic.autocomplete_username(query)
+    return jsonify(data)
