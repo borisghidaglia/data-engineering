@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id='plot-div'>
+</div>
+{% endblock content %}
+
+{% block script %}
+    {{ super() }}
+        <script src="{{ url_for('static', filename='js/plotly-latest.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/plotting.js') }}"></script>
+{% endblock script %}
