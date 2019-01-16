@@ -49,11 +49,28 @@ class Search {
     }
 
     queryReviews(){
-        console.log("Query Reviews !");
+
+        fetch("http://"+window.location.host + '/api/fetch-review-autocomplete/'+this.input.value)
+        .then(function(response) {
+            return response.json()
+        }.bind(this))
+        .then(function(data) {
+            // removing previous result
+            this.queryContainerResult.innerHTML = ""
+
+            // adding the new ones
+            if (data.hits.hits.length > 0) {
+                for (var i = 0; i < data.hits.hits.length; i++) {
+                    let newCard = this.createReviewCard(data.hits.hits[i]["_source"])
+                    this.queryContainerResult.appendChild(newCard)
+                }
+            }
+        }.bind(this));
+
     }
 
     createUserCard(data){
-        // Creating the review card
+        // Creating the user card
         let cardString = [
             '<div class="col-sm-6 col-md-4 p-2"><div class="card"><div class="card-body"><h5 class="card-title">',
             data["username"],
@@ -63,6 +80,26 @@ class Search {
             data["nb_cities_visited"],
             '</li><li class="list-group-item"><b>Trouvé depuis : </b>',
             data["attraction_review_name"],
+            '</li></ul></div></div>'
+        ].join('')
+        let doc = new DOMParser().parseFromString(cardString, 'text/html');
+        let card = doc.body.firstChild;
+        return card
+    }
+
+    createReviewCard(data){
+        // Creating the review card
+        let cardString = [
+            '<div class="col-sm-6 col-md-4 p-2"><div class="card"><div class="card-body"><h5 class="card-title">',
+            data["title"],
+            '</h5><p class="card-text">',
+            data["content"],
+            '</p></div><ul class="list-group list-group-flush"><li class="list-group-item"><b>Attraction : </b>',
+            data['attraction_review_name'],
+            '</li><li class="list-group-item"><b>Username : </b>',
+            data["username"],
+            '</li><li class="list-group-item"><b>Grade : </b>',
+            data["grade"],
             '</li></ul></div></div>'
         ].join('')
         let doc = new DOMParser().parseFromString(cardString, 'text/html');

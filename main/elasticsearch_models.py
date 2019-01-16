@@ -37,11 +37,21 @@ class ElasticsearchDB():
                 }
             }
         }
-        # query = {
-        #     "size" : 50,
-        #     "query": {
-        #        "regexp": { "username": ".*" + query + ".*"}
-        #     }
-        # }
         res = self.client.search(index="tripadvisor_user", body=query, filter_path=['hits.hits'])
+        return res
+
+    def autocomplete_review(self, query):
+        # https://www.elastic.co/guide/en/elasticsearch/guide/current/_query_time_search_as_you_type.html#
+        query = {
+            "size" : 30,
+            "query" : {
+                "match_phrase_prefix" : {
+                    "content" : {
+                        "query": query,
+                        "slop": 10
+                    }
+                }
+            }
+        }
+        res = self.client.search(index="tripadvisor_review", body=query, filter_path=['hits.hits'])
         return res

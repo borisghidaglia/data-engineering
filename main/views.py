@@ -45,6 +45,11 @@ def fetch_user_autocomplete(query):
     data = db_elastic.autocomplete_username(query)
     return jsonify(data)
 
+@app.route('/api/fetch-review-autocomplete/<query>')
+def fetch_review_autocomplete(query):
+    data = db_elastic.autocomplete_review(query)
+    return jsonify(data)
+
 @app.route('/api/all-reviews')
 def get_all_reviews():
     all_reviews = db_mongo.db['tripadvisor_review'].find(None,{'_id':False})
