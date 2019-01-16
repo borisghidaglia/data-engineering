@@ -4,17 +4,28 @@
 <div class="container">
     <form class="py-5">
         <div class="form-row">
-            <div class="col-md-5">
-                <label class="h5 mb-3">What are you looking for ?</label>
+            <div class="col-md-6 mb-5">
+                <label class="h5 lead" for="formControlSelect">Type of search ?</label>
+                <select class="form-control" id="formControlSelect">
+                    <option>Users, by username</option>
+                    <option>Reviews, by title and content</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="h5 lead">Query ?</label>
                 <input id="search-input" type="text" class="form-control" placeholder="Super visite !">
             </div>
         </div>
     </form>
-    <div id="container-query-result" class="card-columns"></div>
+
+    <div class="container">
+        <div class="row" id="container-query-result"></div>
+    </div>
+
 </div>
 {% endblock %}
 
 {% block script %}
-    {{ super() }}
-    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+{{ super() }}
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
 {% endblock %}
