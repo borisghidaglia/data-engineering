@@ -25,11 +25,23 @@ class ElasticsearchDB():
             yield obj
 
     def autocomplete_username(self, query):
+        # https://www.elastic.co/guide/en/elasticsearch/guide/current/_query_time_search_as_you_type.html#
         query = {
-            "size" : 50,
-            "query": {
-               "regexp": { "username": ".*" + query + ".*"}
+            "size" : 30,
+            "query" : {
+                "match_phrase_prefix" : {
+                    "username" : {
+                        "query": query,
+                        "max_expansions": 5
+                    }
+                }
             }
         }
-        res = self.client.search(index="tripadvisor_user", body=query)
+        # query = {
+        #     "size" : 50,
+        #     "query": {
+        #        "regexp": { "username": ".*" + query + ".*"}
+        #     }
+        # }
+        res = self.client.search(index="tripadvisor_user", body=query, filter_path=['hits.hits'])
         return res

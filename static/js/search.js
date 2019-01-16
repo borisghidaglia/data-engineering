@@ -10,6 +10,11 @@ class Search {
 
     makeQuery(e){
 
+        if(this.input.value == ""){
+            this.queryContainerResult.innerHTML = ""
+            return 0
+        }
+
         fetch("http://"+window.location.host + '/api/fetch-users-autocomplete/'+this.input.value)
         .then(function(response) {
             return response.json()
@@ -26,6 +31,7 @@ class Search {
                 }
             }
         }.bind(this));
+
     }
 
     createUserCard(data){
