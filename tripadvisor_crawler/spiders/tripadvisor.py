@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+
+
+# To populate the database, the spiders must be called in the following order:
+# Attraction --> Attraction Reviews --> User --> User Reviews
 from scrapy import Request, Spider
 from ..items import Attraction, AttractionReview, Review, User
 from ..utils import get_d_values, get_g_values, TripadvisorMongoDB
