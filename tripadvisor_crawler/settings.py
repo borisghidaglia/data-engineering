@@ -14,7 +14,8 @@ BOT_NAME = 'tripadvisor_crawler'
 SPIDER_MODULES = ['tripadvisor_crawler.spiders']
 NEWSPIDER_MODULE = 'tripadvisor_crawler.spiders'
 
-
+LOG_FILE = 'crawls/log.log'
+LOG_LEVEL = 'INFO'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'tripadvisor_crawler (+http://www.yourdomain.com)'
 
