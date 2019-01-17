@@ -5,9 +5,24 @@ class Search {
         this.input = document.getElementById('search-input')
         this.queryContainerResult = document.getElementById("container-query-result");
         this.formControlSelect = document.getElementById("formControlSelect");
+        this.formChoices = {
+            0 : "Users, by username",
+            1 : "Reviews, by title, content, attraction name and username"
+        }
 
         // Event Listeners
         this.input.addEventListener('input', this.choseQuery.bind(this))
+
+        // Init form
+        this.addChoices()
+    }
+
+    addChoices(){
+        for (var i = 0; i < Object.keys(this.formChoices).length; i++) {
+            let option = document.createElement("option");
+            option.innerText = this.formChoices[i]
+            this.formControlSelect.appendChild(option)
+        }
     }
 
     choseQuery(e){
@@ -17,10 +32,10 @@ class Search {
             return 0
         }
 
-        if (this.formControlSelect.value == "Users, by username"){
+        if ( this.formControlSelect.value == this.formChoices[0] ){
             this.queryUsers()
             return 0
-        } else if (this.formControlSelect.value == "Reviews, by title and content") {
+        } else if ( this.formControlSelect.value == this.formChoices[1] ) {
             this.queryReviews()
             return 0
         }

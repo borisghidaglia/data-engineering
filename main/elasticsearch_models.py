@@ -41,15 +41,18 @@ class ElasticsearchDB():
         return res
 
     def autocomplete_review(self, query):
-        # https://www.elastic.co/guide/en/elasticsearch/guide/current/_query_time_search_as_you_type.html#
+        # multi_match : https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
+        # fuzziness : https://stackoverflow.com/questions/29632339/elasticsearch-multi-match-query-over-multiple-fields-with-fuzziness
         query = {
             "size" : 30,
             "query" : {
-                "match_phrase_prefix" : {
-                    "content" : {
-                        "query": query,
-                        "slop": 10
-                    }
+                "multi_match" : {
+                    "fields" : ["title^10", "content", "attraction_review_name^5", "username^10"],
+                    "query" : query,
+                    # "type" : "phrase_prefix",
+                    "max_expansions": 50,
+                    "fuzziness": "AUTO",
+                    "prefix_length" : 2
                 }
             }
         }
