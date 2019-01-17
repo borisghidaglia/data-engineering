@@ -4,21 +4,25 @@
 <div class="container">
     <form class="py-5">
         <div class="form-row">
-            <div class="col-md-5">
-                <label class="h5 mb-3">What are you looking for ?</label>
-                <input id="search-input" type="text" class="form-control" placeholder="Super visite !">
+            <div class="col-md-6 mb-5">
+                <label class="h5 lead" for="formControlSelect">Type of search ?</label>
+                <select class="form-control" id="formControlSelect"></select>
+            </div>
+            <div class="col-md-6">
+                <label class="h5 lead">Query ?</label>
+                <input id="search-input" type="text" class="form-control" placeholder="Super visite !" onkeydown="return (event.keyCode!=13);">
             </div>
         </div>
     </form>
-    <div class="">
-        {% for elt in data.hits.hits %}
-            <p>{{elt}}</p>
-        {% endfor %}
+
+    <div class="container">
+        <div class="row" id="container-query-result"></div>
     </div>
+
 </div>
 {% endblock %}
 
 {% block script %}
-    {{ super() }}
-    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+{{ super() }}
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
 {% endblock %}

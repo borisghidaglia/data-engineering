@@ -28,7 +28,7 @@ def home():
 
 @app.route('/search')
 def search():
-    data = db_elastic.test()
+    data = db_elastic.autocomplete_username(query="")
     return render_template(
         'main/search.html',
         data = data
@@ -46,6 +46,22 @@ def fetch_raw_reviews(begin_at=0):
     """Returns first 10 reviews following the `begin_at` index """
     reviews = db_mongo.lazy_load('tripadvisor_review', begin_at=int(begin_at))
     return jsonify(reviews)
+
+@app.route('/api/fetch-users-autocomplete/<query>')
+def fetch_user_autocomplete(query):
+    data = db_elastic.autocomplete_username(query)
+    return jsonify(data)
+
+@app.route('/api/fetch-review-autocomplete/<query>')
+def fetch_review_autocomplete(query):
+    data = db_elastic.autocomplete_review(query)
+    return jsonify(data)
+
+@app.route('/api/all-reviews')
+def get_all_reviews():
+    all_reviews = db_mongo.db['tripadvisor_review'].find(None,{'_id':False})
+    return jsonify(list(all_reviews))
+
 
 @app.route('/api/grades')
 def get_grades():
