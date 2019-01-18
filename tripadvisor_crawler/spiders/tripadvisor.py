@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+
+
+# To populate the database, the spiders must be called in the following order:
+# Attraction --> Attraction Reviews --> User --> User Reviews
 from scrapy import Request, Spider
 from ..items import Attraction, AttractionReview, Review, User
 from ..utils import get_d_values, get_g_values, TripadvisorMongoDB
@@ -84,11 +88,19 @@ class TripadvisorReviewSpider(Spider):
     def parse_review(self, response):
         review_cards = response.xpath('//div[@class="social-sections-CardSection__background---NNo_"]')
         for review in review_cards:
+
+            title = review.xpath('.//*[@class="social-sections-ReviewSection__title--HIMCX"]/text()').extract_first()
+            if title is None:
+                # This skips the card if it actually is not a review,
+                # here is an example of someone asking a question on Jan 2014
+                # https://www.tripadvisor.fr/Profile/PSUalum14
+                continue
+
             g,d,r = review.xpath('.//*[@class="social-sections-ReviewSection__review_wrap--1Gzlk"]/a/@href').extract_first().split('-')[1:4]
 
             yield Review(
                 review_id = r[1:],
-                title = review.xpath('.//*[@class="social-sections-ReviewSection__title--HIMCX"]/text()').extract_first(),
+                title = title,
                 content = review.xpath('.//*[@class="social-sections-ReviewSection__quote--1AUX1"]/text()').extract_first(),
                 grade = int(review.xpath('.//*[contains(@class,"ui_bubble_rating ")]/@class').extract_first()[-2:]),
                 attraction_review_name = review.xpath('.//*[contains(@class,"social-common-POIObject__poi_name--39wh4")]/text()').extract_first(),

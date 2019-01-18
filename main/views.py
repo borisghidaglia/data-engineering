@@ -13,6 +13,8 @@ db_elastic = ElasticsearchDB()
 # Main routes
 @app.route('/')
 def home():
+    """Returns the homepage prefilled with the first few reviews of the database,
+    the rest can be fetched by the client using js and api function `fetch_raw_reviews` """
     reviews = db_mongo.lazy_load('tripadvisor_review')
     col_1 = reviews[::3]
     col_2 = reviews[1::3]
@@ -32,11 +34,16 @@ def search():
         data = data
     )
 
+@app.route('/grade-hist')
+def grade_hist():
+    """Returns the template, the plotting happens in js on the client's side"""
+    return render_template('plotting.html')
 
 
 # API routes
 @app.route('/api/fetch-raw-reviews/<begin_at>')
 def fetch_raw_reviews(begin_at=0):
+    """Returns first 10 reviews following the `begin_at` index """
     reviews = db_mongo.lazy_load('tripadvisor_review', begin_at=int(begin_at))
     return jsonify(reviews)
 
@@ -58,12 +65,9 @@ def get_all_reviews():
 
 @app.route('/api/grades')
 def get_grades():
+    """Returns a list of all reviews grades"""
     grades = db_mongo.db['tripadvisor_review'].find(None, {'grade': True, '_id':False})
     grade_list = [grade_dict['grade'] for grade_dict in grades]
 
     return jsonify(grade_list)
     # return jsonify(dict(grades))
-
-@app.route('/grade-hist')
-def grade_hist():
-    return render_template('plotting.html')
