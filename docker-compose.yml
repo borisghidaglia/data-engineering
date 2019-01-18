@@ -4,6 +4,7 @@ services:
 
   app:
     build: .
+    network_mode: host
     command: python run.py
     volumes:
       - .:/code
@@ -16,6 +17,9 @@ services:
 
   elastic:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.5.0
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
     container_name: elasticsearch
     ports:
       - "9200:9200"
@@ -25,10 +29,7 @@ services:
   mongo:
     image: mongo
     container_name: mongo
-    environment:
-      - MONGO_DATA_DIR=/data/db
-      - MONGO_LOG_DIR=/dev/log
     volumes:
-      - ./data/mongo:/data/mongo/db
+      - ./data/mongo:/data/db
     ports:
       - "27017:27017"

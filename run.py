@@ -10,4 +10,4 @@ if __name__ == '__main__':
         ])
         app.jinja_loader = my_loader
         app.static_folder = '../static'
-        app.run()
+        app.run('0.0.0.0')
