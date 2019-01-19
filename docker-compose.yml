@@ -30,6 +30,10 @@ services:
     image: mongo
     container_name: mongo
     volumes:
-      - ./data/mongo:/data/db
+      - mongodata:/data/db
+      - ./data/dump:/data/dump
     ports:
       - "27017:27017"
+
+volumes:
+  mongodata:

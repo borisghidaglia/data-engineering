@@ -2,3 +2,4 @@
 *.csv
 instance/config.py
 crawls/
+data/*
