@@ -37,7 +37,9 @@ class ElasticsearchDB():
                 }
             }
         }
-        res = self.client.search(index="tripadvisor_user", body=query, filter_path=['hits.hits'])
+        res = None
+        if self.client.indices.exists(index="tripadvisor_user"):
+            res = self.client.search(index="tripadvisor_user", body=query, filter_path=['hits.hits'])
         return res
 
     def autocomplete_review(self, query):
@@ -56,5 +58,7 @@ class ElasticsearchDB():
                 }
             }
         }
-        res = self.client.search(index="tripadvisor_review", body=query, filter_path=['hits.hits'])
+        res = None
+        if self.client.indices.exists(index="tripadvisor_review"):
+            res = self.client.search(index="tripadvisor_review", body=query, filter_path=['hits.hits'])
         return res
