@@ -63,11 +63,9 @@ def get_all_reviews():
     return jsonify(list(all_reviews))
 
 
-@app.route('/api/grades')
-def get_grades():
+@app.route('/api/grades/<query>')
+def get_grades(query=None):
     """Returns a list of all reviews grades"""
-    grades = db_mongo.db['tripadvisor_review'].find(None, {'grade': True, '_id':False})
-    grade_list = [grade_dict['grade'] for grade_dict in grades]
-
+    data = db_elastic.autocomplete_review(query)
+    grade_list = [grade_dict['_source']['grade'] for grade_dict in data['hits']['hits']]
     return jsonify(grade_list)
-    # return jsonify(dict(grades))
