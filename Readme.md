@@ -8,7 +8,7 @@ Tripadvisor.
 1. [Getting Started](#getting-started)  
     1.1 [Prerequisites](#prerequisites)  
     1.2 [Installing and Running](#installing-and-running)  
-    1.3 [The app doesn't run ?](#the-app-doesn-t-run)
+    1.3 [The app doesn't run ?](#the-app-doesnt-run-)
 2. [User Guide](#user-guide)  
     2.1 [Home Page](#home-page)
     2.1 [Search Page](#search-page)
