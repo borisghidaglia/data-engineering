@@ -35,7 +35,7 @@ $ cd data-engineering/
 ```
 
 Then, you need to download the dumped data we prepared for you, so that it can be restored
-in the *mongo* container you will start. * - Make sure you have curl and unzip installed*
+in the *mongo* container you will start. *- Make sure you have curl and unzip installed*
 ```bash
 $ mkdir data && \
 mkdir data/dump && \
