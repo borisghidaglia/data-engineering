@@ -1,12 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div id='plot-div'>
+<div class="container">
+    <form class="py-5">
+        <div class="form-row">
+            <div class="col-md-6 mb-5">
+                <label class="h5 lead" for="formControlSelect">Type of search ?</label>
+                <select class="form-control" id="formControlSelect"></select>
+            </div>
+            <div class="col-md-6">
+                <label class="h5 lead">Query ?</label>
+                <input id="search-input" type="text" class="form-control" placeholder="Super visite !" onkeydown="return (event.keyCode!=13);">
+            </div>
+        </div>
+    </form>
+
+    <div class="container">
+        <div class="row" id="container-query-result"></div>
+    </div>
+    <div id='plot-div' class="container">
+    </div>
+
 </div>
+
 {% endblock content %}
 
 {% block script %}
     {{ super() }}
-        <script src="{{ url_for('static', filename='js/plotly-latest.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/plotting.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plotly-latest.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plotting.js') }}"></script>
 {% endblock script %}
