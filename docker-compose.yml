@@ -35,13 +35,14 @@ services:
       - "27017:27017"
 
   mongo_seed:
-      image: mongo
-      container_name: mongo_seed
-      links:
-        - mongo
-      volumes:
-        - ./data/dump:/data/dump
-      command: mongorestore --host mongo -d tripadvisor /data/dump
+    image: mongo
+    container_name: mongo_seed
+    links:
+      - mongo
+    volumes:
+      - ./data/dump:/data/dump
+    command: mongorestore --host mongo -d tripadvisor /data/dump
+    restart: on-failure
 
 
 volumes:
