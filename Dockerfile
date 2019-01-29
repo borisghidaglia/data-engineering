@@ -5,4 +5,6 @@ WORKDIR /code
 
 COPY . .
 
-RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN pip install --upgrade pip && pip install pipenv && pipenv install
+
+CMD ["pipenv", "run", "python" , "run.py"]t

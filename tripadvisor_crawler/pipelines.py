@@ -11,7 +11,7 @@ class MongoPipeline(object):
 
     def open_spider(self, spider):
         self.collection_name = "%s"%spider.name
-        self.client = pymongo.MongoClient()
+        self.client = pymongo.MongoClient(f"mongodb://{os.env["MONGO_HOST"]}:{os.env["MONGO_PORT"]}")
         self.db = self.client['tripadvisor']
 
     def close_spider(self, spider):
