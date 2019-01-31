@@ -34,10 +34,10 @@ def search():
         data = data
     )
 
-@app.route('/grade-hist')
-def grade_hist():
+@app.route('/graph')
+def graph():
     """Returns the template, the plotting happens in js on the client's side"""
-    return render_template('plotting.html')
+    return render_template('main/graph.html')
 
 
 # API routes
@@ -68,4 +68,12 @@ def get_grades(query=None):
     """Returns a list of all reviews grades"""
     data = db_elastic.autocomplete_review(query)
     grade_list = [grade_dict['_source']['grade'] for grade_dict in data['hits']['hits']]
-    return jsonify(grade_list)
+    grade_count = {grade : grade_list.count(grade) for grade in (10,20,30,40,50)}
+    return jsonify(grade_count)
+
+@app.route('/api/user-grades/<username>')
+def get_grade_for_user(username):
+    data = db_mongo.db['tripadvisor_review'].find({'username':username}, {'_id': False, 'grade': True})
+    grade_list = [grade_dict['grade'] for grade_dict in data]
+    grade_count = {grade : grade_list.count(grade) for grade in (10,20,30,40,50)}
+    return jsonify(grade_count)

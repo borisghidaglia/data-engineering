@@ -5,7 +5,7 @@
 {% block sub_header_subtitle %}
 <div class="row d-flex justify-content-center align-items-center  py-3">
     <a href="{{ url_for('search') }}"><button type="button" class="btn bg-clear-blue text-dark mx-3 mb-3">Search through the data !</button></a>
-    <button type="button" class="btn bg-clear-green text-dark mx-3 mb-3">Generate Graphs</button>
+    <a href="{{ url_for('graph') }}"><button type="button" class="btn bg-clear-green text-dark mx-3 mb-3">Generate Graphs</button></a>
 </div>
 {% endblock %}
 
