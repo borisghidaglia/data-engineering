@@ -11,7 +11,9 @@ Tripadvisor.
     1.3 [The app doesn't run ?](#the-app-doesnt-run-)
 2. [User Guide](#user-guide)  
     2.1 [Home Page](#home-page)  
-    2.1 [Search Page](#search-page)
+    2.2 [Search Page](#search-page)  
+    2.3 [Graph Page](#graph-page)
+3. [Reference Guide](#reference-guide)
 
 ## Getting Started
 
@@ -79,7 +81,7 @@ As of the *<service_name>* you can use, they are : *app, elastic, mongo, mongo_s
 * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 * Restarting with stat
 * Debugger is active!
-* Debugger PIN: 313-098-103```
+* Debugger PIN: 313-098-103
 ```
 
 ## User Guide
@@ -94,4 +96,33 @@ The home page is very basic : you can only scroll and lazy-load more review card
 If you want to find specific reviews or users, you found the perfect page !  
 ‌‌‌‌‌‌
 
-![Home Page](img/search-page.gif)
+![Search Page](img/search-page.gif)
+
+### Graph Page
+Calling to the secret plot lover in you, here are a few plots to get a global view of grade distribution of reviews
+‌‌‌‌‌‌
+
+![Graph Page](img/graph-page.gif)
+
+
+## Reference guide
+
+### Crawling Ex Nihilo
+
+If you'd like to populate the database yourself, here are the commands you'll need to run:
+
+Start the container:
+```bash
+$ docker-compose up -d
+```
+Then, run each crawler individually:
+```bash
+$ docker exec -it dataengineering_app_1 scrapy crawl tripadvisor_attraction
+$ docker exec -it dataengineering_app_1 scrapy crawl tripadvisor_attraction_review
+$ docker exec -it dataengineering_app_1 scrapy crawl tripadvisor_user
+$ docker exec -it dataengineering_app_1 scrapy crawl tripadvisor_review
+```
+
+### Elastic Search
+
+We chose elastic for a more understanding search. With it we can adapt to grammar (for instance words with and without an 's' at the end), or even better, spelling errors ! As is demonstrated with the two page gifs where `magnifique` and `magnifike` give the same output.
