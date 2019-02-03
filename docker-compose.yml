@@ -1,11 +1,9 @@
-version: '3'
+version: "3"
 
 services:
-
   app:
     build: .
-    network_mode: host
-    command: python run.py
+    command: pipenv run python run.py
     volumes:
       - .:/code
     ports:
@@ -14,6 +12,7 @@ services:
       - elastic
       - mongo
     restart: on-failure
+    env_file: .env
 
   elastic:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.5.0
@@ -25,6 +24,7 @@ services:
       - "9200:9200"
     depends_on:
       - mongo
+    env_file: .env
 
   mongo:
     image: mongo
@@ -33,6 +33,7 @@ services:
       - mongodata:/data/db
     ports:
       - "27017:27017"
+    env_file: .env
 
   mongo_seed:
     image: mongo
@@ -43,7 +44,7 @@ services:
       - ./data/dump:/data/dump
     command: mongorestore --host mongo -d tripadvisor /data/dump
     restart: on-failure
-
+    env_file: .env
 
 volumes:
   mongodata:

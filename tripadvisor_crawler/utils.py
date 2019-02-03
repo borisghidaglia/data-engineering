@@ -1,13 +1,15 @@
 import pymongo
 import json
-
+import os 
 # Databases management
 
 class DatabaseMongo:
 
     def __init__(self, db_name):
-        self.db_name =db_name
-        self.client = pymongo.MongoClient()
+        self.db_name = db_name
+        print("MONGOURL")
+        print(f"mongodb://{os.environ.get('MONGO_HOST')}:{os.environ.get('MONGO_PORT')}")
+        self.client = pymongo.MongoClient(f"mongodb://{os.environ.get('MONGO_HOST')}:{os.environ.get('MONGO_PORT')}")
         self.db = self.client[db_name]
 
 
