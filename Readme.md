@@ -84,6 +84,14 @@ As of the *<service_name>* you can use, they are : *app, elastic, mongo, mongo_s
 * Debugger PIN: 313-098-103
 ```
 
+## Built With
+
+* [Flask](http://flask.pocoo.org/) - Web framework, with API views for easier communication with clientside javascript
+* [Scrapy](https://scrapy.org/) - Used to extract data from tripadvisor's website
+* [MongoDB](https://www.mongodb.com/) - A noSQL Database used to store unstructed data
+* [Elasticsearch](https://www.elastic.co/) - Fast and pertinent Search Engine, used in Search page and Graph page
+* [Docker](https://www.docker.com/) - Used to facilitate portability, ease of deployment and scalibity of our project... Theoretically.
+
 ## User Guide
 
 ### Home Page
@@ -117,12 +125,17 @@ $ docker-compose up -d
 ```
 Then, run each crawler individually:
 ```bash
-$ docker exec -it dataengineering_app_1 scrapy crawl tripadvisor_attraction
-$ docker exec -it dataengineering_app_1 scrapy crawl tripadvisor_attraction_review
-$ docker exec -it dataengineering_app_1 scrapy crawl tripadvisor_user
-$ docker exec -it dataengineering_app_1 scrapy crawl tripadvisor_review
+$ docker-comose exec app scrapy crawl tripadvisor_attraction
+# Crawls names for every g_value (tripadvisor attraction id) listed in json file
+$ docker-comose exec app scrapy crawl tripadvisor_attraction_review
+# Crawls places listed in json file, using attraction names scrapes before
+$ docker-comose exec app scrapy crawl tripadvisor_user
+# Crawls all users who left a review on places scraped above (this will take a while)
+$ docker-comose exec app scrapy crawl tripadvisor_review
+# Crawls the first ten reviews of all users present in the database (this will take even longer !)
 ```
 
-### Elastic Search
+### Elasticsearch
 
 We chose elastic for a more understanding search. With it we can adapt to grammar (for instance words with and without an 's' at the end), or even better, spelling errors ! As is demonstrated with the two page gifs where `magnifique` and `magnifike` give the same output.
+We used elasticsearch in the search page (obviously) and for the first type of graph because of its 'intelligence' while searching. Elsewhere we simply used mongo.
