@@ -4,7 +4,6 @@ services:
 
   app:
     build: .
-    network_mode: host
     command: python run.py
     volumes:
       - .:/code

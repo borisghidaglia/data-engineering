@@ -7,7 +7,7 @@ class DatabaseMongo:
 
     def __init__(self, db_name):
         self.db_name =db_name
-        self.client = pymongo.MongoClient()
+        self.client = pymongo.MongoClient("mongodb://mongo:27017")
         self.db = self.client[db_name]
 
 

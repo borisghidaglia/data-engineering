@@ -7,7 +7,7 @@ mongo = TripadvisorMongoDB()
 class ElasticsearchDB():
 
     def __init__(self, *args, **kwargs):
-        self.client = Elasticsearch()
+        self.client = Elasticsearch("http://elastic:9200")
         bulk(self.client, self.bulk_index_mongo('tripadvisor_user'))
         bulk(self.client, self.bulk_index_mongo('tripadvisor_review'))
 
