@@ -14,6 +14,8 @@ Tripadvisor.
     2.2 [Search Page](#search-page)  
     2.3 [Graph Page](#graph-page)
 3. [Reference Guide](#reference-guide)
+    3.1 [Crawling Ex Nihilo](#crawling-ex-nihilo)
+    3.2 [Why Elasticsearch ?](#why-elasticsearch-)
 
 ## Getting Started
 
@@ -134,8 +136,9 @@ $ docker-comose exec app scrapy crawl tripadvisor_user
 $ docker-comose exec app scrapy crawl tripadvisor_review
 # Crawls the first ten reviews of all users present in the database (this will take even longer !)
 ```
+_You may want to stop crawling users at a certain point et carry on with reviews_
 
-### Elasticsearch
+### Why Elasticsearch ?
 
 We chose elastic for a more understanding search. With it we can adapt to grammar (for instance words with and without an 's' at the end), or even better, spelling errors ! As is demonstrated with the two page gifs where `magnifique` and `magnifike` give the same output.
 We used elasticsearch in the search page (obviously) and for the first type of graph because of its 'intelligence' while searching. Elsewhere we simply used mongo.
