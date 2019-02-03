@@ -127,16 +127,18 @@ $ docker-compose up -d
 ```
 Then, run each crawler individually:
 ```bash
-$ docker-comose exec app scrapy crawl tripadvisor_attraction
+$ docker-compose exec app scrapy crawl tripadvisor_attraction
 # Crawls names for every g_value (tripadvisor attraction id) listed in json file
-$ docker-comose exec app scrapy crawl tripadvisor_attraction_review
+$ docker-compose exec app scrapy crawl tripadvisor_attraction_review
 # Crawls places listed in json file, using attraction names scrapes before
-$ docker-comose exec app scrapy crawl tripadvisor_user
+$ docker-compose exec app scrapy crawl tripadvisor_user
 # Crawls all users who left a review on places scraped above (this will take a while)
-$ docker-comose exec app scrapy crawl tripadvisor_review
+$ docker-compose exec app scrapy crawl tripadvisor_review
 # Crawls the first ten reviews of all users present in the database (this will take even longer !)
 ```
 _You may want to stop crawling users at a certain point et carry on with reviews_
+
+If you want to know what g_values and d_values are, check out the comments in `tripadvisor_crawler/items.py`. If you wish to modify their starting values, you must change `tripadvisor_crawler/spiders/g_values.json` and `tripadvisor_crawler/spiders/d_values_by_attraction.json`
 
 ### Why Elasticsearch ?
 
