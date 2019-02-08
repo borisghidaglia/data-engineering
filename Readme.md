@@ -13,8 +13,8 @@ Tripadvisor.
     2.1 [Home Page](#home-page)  
     2.2 [Search Page](#search-page)  
     2.3 [Graph Page](#graph-page)
-3. [Reference Guide](#reference-guide)
-    3.1 [Crawling Ex Nihilo](#crawling-ex-nihilo)
+3. [Reference Guide](#reference-guide)  
+    3.1 [Crawling Ex Nihilo](#crawling-ex-nihilo)  
     3.2 [Why Elasticsearch ?](#why-elasticsearch-)
 
 ## Getting Started
